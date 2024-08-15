@@ -15,7 +15,7 @@ const WEATHER = {
   '20004': {'forecast': 'Full of hot air.', 'temp': '95F'},
   '99709': {'forecast': 'Very cold. May need to crawl inside a Tauntaun for warmth.', 'temp': '-25F'}
 }
-
+// console.log(WEATHER[90210]["forecast"]);
 const DEFAULT_FORECAST = 'Kind of boring.';
 
 app.get('/', (req, res) => {
@@ -26,6 +26,12 @@ app.get('/weather.txt', (req, res) => {
   const zipcode = req.query.zipcode;
   // TODO: Get the weather for this zipcode and return the forecast if available.
   // If not, return the default forecast.
+  
+  if (WEATHER[zipcode]) {
+    res.send(WEATHER[zipcode].forecast);
+  } else {
+    res.send(DEFAULT_FORECAST);
+  }
 })
 
 app.post('/order-cookies.json', (req, res) => {
